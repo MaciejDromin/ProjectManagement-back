@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/projectmngr?useUnicode=yes&characterEncoding=UTF-8
+    username: projectuser
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
