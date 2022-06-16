@@ -1,0 +1,61 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'groovy'
+	id 'jacoco'
+	id 'org.sonarqube' version '3.4.0.2513'
+}
+
+group = 'pl.mlisowski'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.2-M1-groovy-3.0'
+	testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.2-M1-groovy-3.0'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
+sonarqube {
+	properties {
+		property 'sonar.tests', 'src/test/groovy, src/test/java'
+		property 'sonar.host.url', 'http://localhost:9000'
+		property 'sonar.projectKey', 'ProjectManagement'
+		property 'sonar.login', 'sqp_ab3a99abb7c27dc07bdf88d2258e6937fdf7af91'
+	}
+}
+
+tasks.named('sonarqube').configure {
+	dependsOn test
+}
+
+test.finalizedBy jacocoTestReport
