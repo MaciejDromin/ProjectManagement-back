@@ -1,5 +1,6 @@
 package pl.mlisowski.projectManagement.common.state.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,10 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.mlisowski.projectManagement.common.BaseEntity;
 import pl.mlisowski.projectManagement.common.Task;
+import pl.mlisowski.projectManagement.project.domain.Project;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -26,5 +26,10 @@ public class ProjectState extends BaseEntity {
     @OneToMany(mappedBy = "projectState")
     @JsonIgnore
     private List<Task> tasks;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    @JsonBackReference
+    private Project project;
 
 }
