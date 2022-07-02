@@ -1,6 +1,6 @@
-package pl.mlisowski.projectManagement.common.state.application;
+package pl.mlisowski.projectManagement.state.application;
 
-import pl.mlisowski.projectManagement.common.state.domain.PredefinedGroupState;
+import pl.mlisowski.projectManagement.state.domain.PredefinedGroupState;
 
 import java.util.List;
 

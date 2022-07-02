@@ -3,9 +3,8 @@ package pl.mlisowski.projectManagement.group.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import pl.mlisowski.projectManagement.common.BaseEntity;
-import pl.mlisowski.projectManagement.common.state.domain.PredefinedGroupState;
+import pl.mlisowski.projectManagement.state.domain.PredefinedGroupState;
 import pl.mlisowski.projectManagement.project.domain.Project;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

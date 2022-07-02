@@ -1,11 +1,12 @@
-package pl.mlisowski.projectManagement.common;
+package pl.mlisowski.projectManagement.task.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.mlisowski.projectManagement.common.state.domain.PredefinedGroupState;
-import pl.mlisowski.projectManagement.common.state.domain.ProjectState;
+import pl.mlisowski.projectManagement.common.BaseEntity;
+import pl.mlisowski.projectManagement.state.domain.PredefinedGroupState;
+import pl.mlisowski.projectManagement.state.domain.ProjectState;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

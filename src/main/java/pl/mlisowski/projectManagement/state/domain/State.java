@@ -1,4 +1,4 @@
-package pl.mlisowski.projectManagement.common.state.domain;
+package pl.mlisowski.projectManagement.state.domain;
 
 public interface State {
 

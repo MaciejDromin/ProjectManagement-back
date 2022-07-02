@@ -1,9 +1,9 @@
-package pl.mlisowski.projectManagement.common.state.application;
+package pl.mlisowski.projectManagement.state.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.mlisowski.projectManagement.common.state.application.port.PredefinedGroupStateRepository;
-import pl.mlisowski.projectManagement.common.state.domain.PredefinedGroupState;
+import pl.mlisowski.projectManagement.state.application.port.PredefinedGroupStateRepository;
+import pl.mlisowski.projectManagement.state.domain.PredefinedGroupState;
 
 import java.util.List;
 

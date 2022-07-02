@@ -1,9 +1,9 @@
-package pl.mlisowski.projectManagement.common.state.web;
+package pl.mlisowski.projectManagement.state.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.mlisowski.projectManagement.common.state.application.PredefinedGroupStateService;
-import pl.mlisowski.projectManagement.common.state.domain.PredefinedGroupState;
+import pl.mlisowski.projectManagement.state.application.PredefinedGroupStateService;
+import pl.mlisowski.projectManagement.state.domain.PredefinedGroupState;
 
 import java.util.List;
 

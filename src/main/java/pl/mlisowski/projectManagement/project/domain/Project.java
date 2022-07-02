@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import pl.mlisowski.projectManagement.common.BaseEntity;
-import pl.mlisowski.projectManagement.common.state.domain.ProjectState;
+import pl.mlisowski.projectManagement.state.domain.ProjectState;
 import pl.mlisowski.projectManagement.group.domain.ProjectGroup;
 import javax.persistence.*;
 import java.util.Set;
