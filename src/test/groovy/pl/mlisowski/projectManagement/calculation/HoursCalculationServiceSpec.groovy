@@ -5,12 +5,12 @@ import pl.mlisowski.projectManagement.hours.domain.Hours
 import spock.lang.Specification
 import spock.lang.Subject
 
-class CalculationServiceSpec extends Specification {
+class HoursCalculationServiceSpec extends Specification {
 
     HoursService hoursService = Mock()
 
     @Subject
-    CalculationService calculationService = new CalculationService(hoursService)
+    HoursCalculationService calculationService = new HoursCalculationService(hoursService)
 
     def "Should properly calculate Real Hours from top"() {
         given:

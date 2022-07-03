@@ -13,7 +13,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CalculationService {
+public class HoursCalculationService {
 
     private Set<Hours> visited;
     private final HoursService hoursService;

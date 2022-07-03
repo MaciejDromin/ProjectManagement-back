@@ -1,9 +1,6 @@
 package pl.mlisowski.projectManagement.task.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.mlisowski.projectManagement.common.BaseEntity;
 import pl.mlisowski.projectManagement.state.domain.PredefinedGroupState;
 import pl.mlisowski.projectManagement.state.domain.ProjectState;
@@ -13,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Builder
 @Entity
 @Getter
 @Setter
@@ -25,6 +23,9 @@ public class Task extends BaseEntity {
 
     @Column
     private String description;
+
+    @Column
+    private boolean finished;
 
     @ManyToOne
     @JoinColumn(name = "predefined_group_state_id")
