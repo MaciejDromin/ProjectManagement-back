@@ -1,25 +1,44 @@
 package pl.mlisowski.projectmanagement.project.domain.dto;
 
-import lombok.Builder;
-import lombok.Value;
-import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
-import pl.mlisowski.projectmanagement.project.domain.Project;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
+import pl.mlisowski.projectmanagement.group.domain.dto.ProjectGroupDto;
 import pl.mlisowski.projectmanagement.project.domain.ProjectStatus;
-import pl.mlisowski.projectmanagement.state.domain.ProjectState;
+import pl.mlisowski.projectmanagement.state.domain.dto.ProjectStateDto;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
-@Value
-@Builder
+@Data
+@NoArgsConstructor
 public class ProjectDto {
 
+    @Builder
+    public ProjectDto(Long id, String uuid, String name, String description, ProjectStatus status,
+                      ProjectDto parentProject, Set<ProjectDto> childProjects, ProjectGroupDto group,
+                      Set<ProjectStateDto> states) {
+        this.id = id;
+        this.uuid = uuid;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.parentProject = parentProject;
+        this.childProjects = childProjects;
+        this.group = group;
+        this.states = states;
+    }
+
     Long id;
-    String uuid;
+    String uuid = UUID.randomUUID().toString();
     String name;
     String description;
     ProjectStatus status;
-    Project parentProject;
-    Set<Project> childProjects;
-    ProjectGroup group;
-    Set<ProjectState> states;
+    @JsonBackReference
+    ProjectDto parentProject;
+    @JsonManagedReference
+    Set<ProjectDto> childProjects = new HashSet<>();
+    ProjectGroupDto group;
+    Set<ProjectStateDto> states = new HashSet<>();
 
 }
