@@ -11,3 +11,17 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    log-request-details: true
+
+jwt:
+  expiration: 3600000
+  secret: mySecret
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+    hibernate: ERROR
+    com: DEBUG

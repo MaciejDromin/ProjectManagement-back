@@ -25,6 +25,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.auth0:java-jwt:4.0.0'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -51,7 +52,7 @@ sonarqube {
 		property 'sonar.tests', 'src/test/groovy, src/test/java'
 		property 'sonar.host.url', 'http://localhost:9000'
 		property 'sonar.projectKey', 'ProjectManagement'
-		property 'sonar.login', 'sqp_ab3a99abb7c27dc07bdf88d2258e6937fdf7af91'
+		property 'sonar.login', 'sqp_667f83f1fa2339826a6f76f63b885282ae0844ba'
 	}
 }
 
