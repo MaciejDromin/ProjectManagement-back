@@ -17,4 +17,6 @@ public interface ProjectService {
 
     Project nestProject(NestProject nestProject);
 
+    void deleteProject(Long id);
+
 }

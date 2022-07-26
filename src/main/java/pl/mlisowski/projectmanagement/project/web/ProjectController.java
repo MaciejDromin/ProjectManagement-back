@@ -31,4 +31,9 @@ public class ProjectController {
         return projectService.nestProject(nestProject);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProject(@PathVariable Long id) {
+        projectService.deleteProject(id);
+    }
+
 }

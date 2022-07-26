@@ -50,4 +50,9 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.save(nestTo);
     }
 
+    @Override
+    public void deleteProject(Long id) {
+        projectRepository.delete(projectRepository.getReferenceById(id));
+    }
+
 }

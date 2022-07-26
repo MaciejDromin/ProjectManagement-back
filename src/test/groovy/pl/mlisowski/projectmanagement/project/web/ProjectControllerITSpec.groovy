@@ -5,17 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.ResultMatcher
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import pl.mlisowski.projectmanagement.BaseITSpec
 import pl.mlisowski.projectmanagement.hours.application.port.HoursRepository
-import pl.mlisowski.projectmanagement.hours.domain.Hours
 import pl.mlisowski.projectmanagement.project.application.port.ProjectRepository
 import pl.mlisowski.projectmanagement.project.domain.ProjectStatus
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto
 
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class ProjectControllerITSpec extends BaseITSpec {
 
     @Autowired
