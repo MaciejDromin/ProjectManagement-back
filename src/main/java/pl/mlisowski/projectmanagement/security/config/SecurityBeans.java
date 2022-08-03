@@ -6,7 +6,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.mlisowski.projectmanagement.security.JsonObjectAuthenticationFilter;
 
 @Component
 public class SecurityBeans {

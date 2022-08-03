@@ -9,4 +9,6 @@ public interface HoursRepository extends JpaRepository<Hours, Long> {
 
     Hours findHoursByOwnerId(Long ownerId);
 
+    void deleteHoursByOwnerId(Long ownerId);
+
 }

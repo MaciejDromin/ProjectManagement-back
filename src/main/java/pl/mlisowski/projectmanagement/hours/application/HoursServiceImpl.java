@@ -29,4 +29,10 @@ public class HoursServiceImpl implements HoursService {
                 .estimatedHours(estimatedHours)
                 .build());
     }
+
+    @Override
+    public void deleteHoursByOwnerId(Long ownerId) {
+        hoursRepository.deleteHoursByOwnerId(ownerId);
+    }
+
 }

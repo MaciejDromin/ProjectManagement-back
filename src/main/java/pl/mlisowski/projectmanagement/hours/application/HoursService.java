@@ -10,4 +10,6 @@ public interface HoursService {
 
     Hours createHoursForOwnerId(Long ownerId, int realHours, int estimatedHours);
 
+    void deleteHoursByOwnerId(Long ownerId);
+
 }
