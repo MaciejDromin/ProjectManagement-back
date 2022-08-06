@@ -36,4 +36,9 @@ public class Task extends BaseEntity {
     @JoinColumn(name = "project_state_id")
     private ProjectState projectState;
 
+    public void setProjectState(ProjectState ps) {
+        this.projectState = ps;
+        this.projectState.addTask(this);
+    }
+
 }

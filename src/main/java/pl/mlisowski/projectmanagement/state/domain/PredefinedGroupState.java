@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Where;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
 import pl.mlisowski.projectmanagement.task.domain.Task;
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
@@ -23,6 +24,7 @@ public class PredefinedGroupState extends BaseEntity {
 
     @OneToMany(mappedBy = "predefinedGroupState")
     @JsonIgnore
+    @Where(clause = "project_state_id IS NULL")
     private List<Task> tasks;
 
     @ManyToOne

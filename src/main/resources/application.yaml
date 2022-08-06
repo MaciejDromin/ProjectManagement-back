@@ -20,6 +20,9 @@ jwt:
 
 logging:
   level:
+    pl:
+      mlisowski:
+        projectmanagement: DEBUG
     org:
       springframework:
         web: DEBUG

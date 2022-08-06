@@ -25,4 +25,9 @@ public class ProjectGroupServiceImpl implements ProjectGroupService {
     public List<ProjectGroup> getAll() {
         return projectGroupRepository.findAll();
     }
+
+    @Override
+    public ProjectGroup getById(Long id) {
+        return projectGroupRepository.findById(id).orElseGet(null);
+    }
 }

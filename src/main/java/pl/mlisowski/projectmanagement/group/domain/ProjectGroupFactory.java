@@ -1,22 +1,20 @@
 package pl.mlisowski.projectmanagement.group.domain;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 import pl.mlisowski.projectmanagement.common.AbstractFactory;
 import pl.mlisowski.projectmanagement.group.domain.dto.ProjectGroupDto;
-import pl.mlisowski.projectmanagement.project.domain.ProjectFactory;
-import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupStateFactory;
+import pl.mlisowski.projectmanagement.project.domain.factory.ProjectFactory;
+import pl.mlisowski.projectmanagement.state.domain.factory.PredefinedGroupStateFactory;
 
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class ProjectGroupFactory implements AbstractFactory<ProjectGroupDto, ProjectGroup> {
 
-    @Setter
-    private ProjectFactory projectFactory;
-    @Setter
-    private PredefinedGroupStateFactory predefinedGroupStateFactory;
+    private final ProjectFactory projectFactory;
+    private final PredefinedGroupStateFactory predefinedGroupStateFactory;
 
     @Override
     public ProjectGroup from(ProjectGroupDto toConvert) {

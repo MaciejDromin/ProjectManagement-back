@@ -9,6 +9,7 @@ import pl.mlisowski.projectmanagement.task.domain.Task;
 import pl.mlisowski.projectmanagement.project.domain.Project;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuperBuilder
@@ -23,15 +24,28 @@ public class ProjectState extends BaseEntity {
     private String name;
 
     @Column
-    private boolean completed;
+    @Builder.Default
+    private boolean completed = false;
 
-    @OneToMany(mappedBy = "projectState")
+    @OneToMany(mappedBy = "projectState", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     @JsonBackReference
     private Project project;
+
+    public void setProject(Project p) {
+        this.project = p;
+        this.project.getStates().add(this);
+    }
+
+    public void addTask(Task t) {
+        if (!this.tasks.contains(t)) {
+            this.tasks.add(t);
+            t.setProjectState(this);
+        }
+    }
 
 }

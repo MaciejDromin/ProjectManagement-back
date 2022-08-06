@@ -1,11 +1,11 @@
-package pl.mlisowski.projectmanagement.project.domain;
+package pl.mlisowski.projectmanagement.project.domain.factory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mlisowski.projectmanagement.common.AbstractFactory;
-import pl.mlisowski.projectmanagement.group.domain.ProjectGroupFactory;
+import pl.mlisowski.projectmanagement.project.domain.Project;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
-import pl.mlisowski.projectmanagement.state.domain.ProjectStateFactory;
+import pl.mlisowski.projectmanagement.state.domain.factory.ProjectStateFactory;
 
 import java.util.stream.Collectors;
 
@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProjectFactory implements AbstractFactory<ProjectDto, Project> {
 
-    private final ProjectGroupFactory projectGroupFactory;
     private final ProjectStateFactory projectStateFactory;
 
     @Override
@@ -30,7 +29,6 @@ public class ProjectFactory implements AbstractFactory<ProjectDto, Project> {
                         .map(this::from)
                         .collect(Collectors.toSet())
                 )
-                .group(projectGroupFactory.from(toConvert.getGroup()))
                 .states(toConvert.getStates().stream()
                         .map(projectStateFactory::from)
                         .collect(Collectors.toSet())
@@ -52,7 +50,6 @@ public class ProjectFactory implements AbstractFactory<ProjectDto, Project> {
                         .map(this::to)
                         .collect(Collectors.toSet())
                 )
-                .group(projectGroupFactory.to(toConvert.getGroup()))
                 .states(toConvert.getStates().stream()
                         .map(projectStateFactory::to)
                         .collect(Collectors.toSet())

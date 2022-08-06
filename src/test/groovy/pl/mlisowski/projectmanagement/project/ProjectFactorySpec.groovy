@@ -2,20 +2,19 @@ package pl.mlisowski.projectmanagement.project
 
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroupFactory
 import pl.mlisowski.projectmanagement.project.domain.Project
-import pl.mlisowski.projectmanagement.project.domain.ProjectFactory
+import pl.mlisowski.projectmanagement.project.domain.factory.ProjectFactory
 import pl.mlisowski.projectmanagement.project.domain.ProjectStatus
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto
-import pl.mlisowski.projectmanagement.state.domain.ProjectStateFactory
+import pl.mlisowski.projectmanagement.state.domain.factory.ProjectStateFactory
 import spock.lang.Specification
 import spock.lang.Subject
 
 class ProjectFactorySpec extends Specification {
 
-    ProjectGroupFactory projectGroupFactory = Mock()
     ProjectStateFactory projectStateFactory = Mock()
 
     @Subject
-    ProjectFactory projectFactory = new ProjectFactory(projectGroupFactory, projectStateFactory)
+    ProjectFactory projectFactory = new ProjectFactory(projectStateFactory)
 
     def "Should create Project"() {
         given:
@@ -28,7 +27,6 @@ class ProjectFactorySpec extends Specification {
         when:
         def project = projectFactory.from(projectDto)
         then:
-        1 * projectGroupFactory.from(_) >> null
         with(project) {
             name == "test"
             status == ProjectStatus.IN_PROGRESS
@@ -48,7 +46,6 @@ class ProjectFactorySpec extends Specification {
         when:
         def projectDto = projectFactory.to(project)
         then:
-        1 * projectGroupFactory.to(_) >> null
         with(projectDto) {
             name == "test"
             status == ProjectStatus.IN_PROGRESS

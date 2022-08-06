@@ -27,7 +27,8 @@ public class Project extends BaseEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private ProjectStatus status;
+    @Builder.Default
+    private ProjectStatus status = ProjectStatus.PLANNING;
 
     @ManyToOne
     @JoinColumn(name = "parent_project_id")
@@ -44,8 +45,14 @@ public class Project extends BaseEntity {
     @JsonBackReference
     private ProjectGroup group;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<ProjectState> states;
+    @Builder.Default
+    private Set<ProjectState> states = new HashSet<>();
+
+    public void addProjectState(ProjectState projectState) {
+        this.states.add(projectState);
+        projectState.setProject(this);
+    }
 
 }

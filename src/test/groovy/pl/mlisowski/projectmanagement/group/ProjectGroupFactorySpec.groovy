@@ -3,8 +3,8 @@ package pl.mlisowski.projectmanagement.group
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroup
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroupFactory
 import pl.mlisowski.projectmanagement.group.domain.dto.ProjectGroupDto
-import pl.mlisowski.projectmanagement.project.domain.ProjectFactory
-import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupStateFactory
+import pl.mlisowski.projectmanagement.project.domain.factory.ProjectFactory
+import pl.mlisowski.projectmanagement.state.domain.factory.PredefinedGroupStateFactory
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -14,12 +14,7 @@ class ProjectGroupFactorySpec extends Specification {
     PredefinedGroupStateFactory predefinedGroupStateFactory = Mock()
 
     @Subject
-    ProjectGroupFactory projectGroupFactory = new ProjectGroupFactory()
-
-    def setup() {
-        projectGroupFactory.setProjectFactory(projectFactory)
-        projectGroupFactory.setPredefinedGroupStateFactory(predefinedGroupStateFactory)
-    }
+    ProjectGroupFactory projectGroupFactory = new ProjectGroupFactory(projectFactory, predefinedGroupStateFactory)
 
     def "Should create ProjectGroup"() {
         given:

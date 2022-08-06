@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.mlisowski.projectmanagement.state.application.port.PredefinedGroupStateRepository;
 import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupState;
-import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupStateFactory;
+import pl.mlisowski.projectmanagement.state.domain.factory.PredefinedGroupStateFactory;
 import pl.mlisowski.projectmanagement.state.domain.dto.PredefinedGroupStateDto;
 
 import java.util.List;

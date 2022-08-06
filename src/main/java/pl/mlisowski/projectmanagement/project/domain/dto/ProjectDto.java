@@ -33,7 +33,7 @@ public class ProjectDto {
     String uuid = UUID.randomUUID().toString();
     String name;
     String description;
-    ProjectStatus status;
+    ProjectStatus status = ProjectStatus.PLANNING;
     @JsonBackReference
     ProjectDto parentProject;
     @JsonManagedReference

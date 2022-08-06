@@ -1,47 +1,44 @@
-package pl.mlisowski.projectmanagement.state.domain;
+package pl.mlisowski.projectmanagement.state.domain.factory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mlisowski.projectmanagement.common.AbstractFactory;
-import pl.mlisowski.projectmanagement.group.domain.ProjectGroupFactory;
-import pl.mlisowski.projectmanagement.state.domain.dto.PredefinedGroupStateDto;
+import pl.mlisowski.projectmanagement.state.domain.ProjectState;
+import pl.mlisowski.projectmanagement.state.domain.dto.ProjectStateDto;
 import pl.mlisowski.projectmanagement.task.domain.TaskFactory;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class PredefinedGroupStateFactory implements AbstractFactory<PredefinedGroupStateDto, PredefinedGroupState> {
+public class ProjectStateFactory implements AbstractFactory<ProjectStateDto, ProjectState> {
 
     private final TaskFactory taskFactory;
-    private final ProjectGroupFactory projectGroupFactory;
 
     @Override
-    public PredefinedGroupState from(PredefinedGroupStateDto toConvert) {
+    public ProjectState from(ProjectStateDto toConvert) {
         if (toConvert == null) return null;
-        return PredefinedGroupState.builder()
-                .id(toConvert.getId())
-                .uuid(toConvert.getUuid())
+        return ProjectState.builder()
                 .name(toConvert.getName())
+                .completed(toConvert.isCompleted())
                 .tasks(toConvert.getTasks().stream()
                         .map(taskFactory::from)
                         .collect(Collectors.toList())
                 )
-                .group(projectGroupFactory.from(toConvert.getGroup()))
                 .build();
     }
 
     @Override
-    public PredefinedGroupStateDto to(PredefinedGroupState toConvert) {
+    public ProjectStateDto to(ProjectState toConvert) {
         if (toConvert == null) return null;
-        return PredefinedGroupStateDto.builder()
+        return ProjectStateDto.builder()
                 .id(toConvert.getId())
                 .uuid(toConvert.getUuid())
                 .name(toConvert.getName())
+                .completed(toConvert.isCompleted())
                 .tasks(toConvert.getTasks().stream()
                         .map(taskFactory::to)
                         .collect(Collectors.toList())
                 )
-                .group(projectGroupFactory.to(toConvert.getGroup()))
                 .build();
     }
 

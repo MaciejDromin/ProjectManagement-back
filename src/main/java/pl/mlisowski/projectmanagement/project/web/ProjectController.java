@@ -1,17 +1,20 @@
 package pl.mlisowski.projectmanagement.project.web;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pl.mlisowski.projectmanagement.project.application.ProjectService;
 import pl.mlisowski.projectmanagement.project.domain.NestProject;
 import pl.mlisowski.projectmanagement.project.domain.Project;
+import pl.mlisowski.projectmanagement.project.domain.dto.ProjectCreationDto;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/projects")
 @RequiredArgsConstructor
+@Slf4j
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -22,7 +25,7 @@ public class ProjectController {
     }
 
     @PostMapping
-    public Project saveProject(@RequestBody ProjectDto project) {
+    public ProjectDto saveProject(@RequestBody ProjectCreationDto project) {
         return projectService.saveProject(project);
     }
 

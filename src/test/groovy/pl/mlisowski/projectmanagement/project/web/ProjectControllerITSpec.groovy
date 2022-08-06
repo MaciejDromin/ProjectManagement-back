@@ -8,9 +8,12 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import pl.mlisowski.projectmanagement.BaseITSpec
+import pl.mlisowski.projectmanagement.group.application.port.ProjectGroupRepository
+import pl.mlisowski.projectmanagement.group.domain.ProjectGroup
 import pl.mlisowski.projectmanagement.hours.application.port.HoursRepository
 import pl.mlisowski.projectmanagement.project.application.port.ProjectRepository
 import pl.mlisowski.projectmanagement.project.domain.ProjectStatus
+import pl.mlisowski.projectmanagement.project.domain.dto.ProjectCreationDto
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto
 
 @AutoConfigureMockMvc(addFilters = false)
@@ -18,6 +21,9 @@ class ProjectControllerITSpec extends BaseITSpec {
 
     @Autowired
     ProjectRepository projectRepository
+
+    @Autowired
+    ProjectGroupRepository projectGroupRepository
 
     @Autowired
     HoursRepository hoursRepository
@@ -30,15 +36,18 @@ class ProjectControllerITSpec extends BaseITSpec {
 
     def "Should create Project with Hours object"() {
         given:
-        def projectDto = ProjectDto.builder()
+        projectGroupRepository.save(ProjectGroup.builder()
+                .id(1)
+                .build())
+
+        def projectCreation = ProjectCreationDto.builder()
                 .name("test")
-                .status(ProjectStatus.DESIGN)
-                .childProjects([] as Set)
-                .states([] as Set)
+                .description("test description")
+                .groupId(1)
                 .build()
         when:
-        def response = mockMvc.perform(MockMvcRequestBuilders.post("/project")
-                .content(objectMapper.writeValueAsString(projectDto))
+        def response = mockMvc.perform(MockMvcRequestBuilders.post("/projects")
+                .content(objectMapper.writeValueAsString(projectCreation))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andReturn()
@@ -51,7 +60,7 @@ class ProjectControllerITSpec extends BaseITSpec {
         def projectSaved = projects.get(0)
         with(projectSaved) {
             name == "test"
-            status == ProjectStatus.DESIGN
+            status == ProjectStatus.PLANNING
         }
         def hours = hoursRepository.findHoursByOwnerId(projectSaved.getId())
         with(hours) {

@@ -9,7 +9,7 @@ import pl.mlisowski.projectmanagement.group.domain.dto.ProjectGroupDto;
 import java.util.List;
 
 @RestController
-@RequestMapping("/group")
+@RequestMapping("/groups")
 @RequiredArgsConstructor
 public class ProjectGroupController {
 

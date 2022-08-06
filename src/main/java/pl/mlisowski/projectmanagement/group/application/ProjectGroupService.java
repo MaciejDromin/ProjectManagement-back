@@ -11,4 +11,6 @@ public interface ProjectGroupService {
 
     List<ProjectGroup> getAll();
 
+    ProjectGroup getById(Long id);
+
 }

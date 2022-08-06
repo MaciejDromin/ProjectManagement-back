@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.mlisowski.projectmanagement.hours.application.HoursService;
 import pl.mlisowski.projectmanagement.state.application.port.ProjectStateRepository;
 import pl.mlisowski.projectmanagement.state.domain.ProjectState;
-import pl.mlisowski.projectmanagement.state.domain.ProjectStateFactory;
+import pl.mlisowski.projectmanagement.state.domain.factory.ProjectStateFactory;
 import pl.mlisowski.projectmanagement.state.domain.dto.ProjectStateDto;
 
 import java.util.List;

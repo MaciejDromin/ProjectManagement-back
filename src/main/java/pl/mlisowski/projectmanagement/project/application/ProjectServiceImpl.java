@@ -6,10 +6,15 @@ import pl.mlisowski.projectmanagement.hours.application.HoursService;
 import pl.mlisowski.projectmanagement.project.application.port.ProjectRepository;
 import pl.mlisowski.projectmanagement.project.domain.NestProject;
 import pl.mlisowski.projectmanagement.project.domain.Project;
-import pl.mlisowski.projectmanagement.project.domain.ProjectFactory;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
+import pl.mlisowski.projectmanagement.project.domain.factory.ProjectCreationFactory;
+import pl.mlisowski.projectmanagement.project.domain.factory.ProjectFactory;
+import pl.mlisowski.projectmanagement.project.domain.dto.ProjectCreationDto;
+import pl.mlisowski.projectmanagement.state.domain.factory.PredefinedGroupStateToProjectStateFactory;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +23,8 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final HoursService hoursService;
     private final ProjectFactory projectFactory;
+    private final ProjectCreationFactory projectCreationFactory;
+    private final PredefinedGroupStateToProjectStateFactory predefinedGroupStateToProjectStateFactory;
 
 
     @Override
@@ -26,12 +33,20 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project saveProject(ProjectDto project) {
-        Project savedProject = projectRepository.save(projectFactory.from(project));
+    @Transactional
+    public ProjectDto saveProject(ProjectCreationDto project) {
+        Project projectToSave = projectCreationFactory.from(project);
+
+        for (var pgs : projectToSave.getGroup().getPredefinedGroupStates()) {
+            var ps = predefinedGroupStateToProjectStateFactory.from(pgs);
+            projectToSave.addProjectState(ps);
+        }
+
+        Project savedProject = projectRepository.save(projectToSave);
 
         hoursService.createHoursForOwnerId(savedProject.getId(), 0, 0);
 
-        return savedProject;
+        return projectFactory.to(savedProject);
     }
 
     @Override
@@ -51,6 +66,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public void deleteProject(Long id) {
         hoursService.deleteHoursByOwnerId(id);
         projectRepository.delete(projectRepository.getReferenceById(id));
