@@ -2,6 +2,7 @@ package pl.mlisowski.projectmanagement.administration.application;
 
 import pl.mlisowski.projectmanagement.administration.domain.ProjectUser;
 import pl.mlisowski.projectmanagement.administration.domain.dto.ProjectUserDto;
+import pl.mlisowski.projectmanagement.administration.domain.dto.UserDetailsDto;
 
 import java.util.Optional;
 
@@ -16,5 +17,7 @@ public interface ProjectUserService {
     Optional<ProjectUser> findProjectUserByEmail(String email);
 
     ProjectUser getProjectUserByUsername(String username);
+
+    UserDetailsDto getUserDetails();
 
 }

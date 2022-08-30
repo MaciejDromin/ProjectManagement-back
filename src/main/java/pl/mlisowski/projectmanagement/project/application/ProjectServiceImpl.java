@@ -1,7 +1,10 @@
 package pl.mlisowski.projectmanagement.project.application;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import pl.mlisowski.projectmanagement.administration.application.ProjectUserService;
 import pl.mlisowski.projectmanagement.hours.application.HoursService;
 import pl.mlisowski.projectmanagement.project.application.port.ProjectRepository;
 import pl.mlisowski.projectmanagement.project.domain.NestProject;
@@ -25,10 +28,13 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectFactory projectFactory;
     private final ProjectCreationFactory projectCreationFactory;
     private final PredefinedGroupStateToProjectStateFactory predefinedGroupStateToProjectStateFactory;
+    private final ProjectUserService projectUserService;
 
 
     @Override
     public List<Project> getAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var user = projectUserService.getProjectUserByUsername(authentication.getName());
         return projectRepository.findAll();
     }
 

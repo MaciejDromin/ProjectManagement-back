@@ -1,11 +1,16 @@
 package pl.mlisowski.projectmanagement.administration.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.mlisowski.projectmanagement.administration.application.port.ProjectUserRepository;
 import pl.mlisowski.projectmanagement.administration.domain.ProjectUser;
 import pl.mlisowski.projectmanagement.administration.domain.ProjectUserFactory;
+import pl.mlisowski.projectmanagement.administration.domain.UserDetailsProjection;
 import pl.mlisowski.projectmanagement.administration.domain.dto.ProjectUserDto;
+import pl.mlisowski.projectmanagement.administration.domain.dto.UserDetailsDto;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
@@ -42,6 +47,20 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     public ProjectUser getProjectUserByUsername(String username) {
         return projectUserRepository.findProjectUserByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User with name: %s doesn't exists!".formatted(username)));
+    }
+
+    @Override
+    public UserDetailsDto getUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return from(projectUserRepository.getProjectUserByUsername(authentication.getName()));
+    }
+
+    private UserDetailsDto from(UserDetailsProjection userDetailsProjection) {
+        return UserDetailsDto.builder()
+                .id(userDetailsProjection.getId())
+                .name(userDetailsProjection.getName())
+                .email(userDetailsProjection.getEmail())
+                .build();
     }
 
 }
