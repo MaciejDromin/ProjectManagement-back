@@ -55,6 +55,14 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         return from(projectUserRepository.getProjectUserByUsername(authentication.getName()));
     }
 
+    @Override
+    public boolean userExists(ProjectUser user) {
+        var userTemp = projectUserRepository.findProjectUserByEmail(user.getEmail());
+        if (userTemp.isPresent()) return true;
+        userTemp = projectUserRepository.findProjectUserByUsername(user.getUsername());
+        return userTemp.isPresent();
+    }
+
     private UserDetailsDto from(UserDetailsProjection userDetailsProjection) {
         return UserDetailsDto.builder()
                 .id(userDetailsProjection.getId())

@@ -20,4 +20,6 @@ public interface ProjectUserService {
 
     UserDetailsDto getUserDetails();
 
+    boolean userExists(ProjectUser user);
+
 }
