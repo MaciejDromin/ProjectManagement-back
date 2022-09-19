@@ -9,7 +9,7 @@ import pl.mlisowski.projectmanagement.state.domain.dto.PredefinedGroupStateDto;
 import java.util.List;
 
 @RestController
-@RequestMapping("/predefinedGroupState")
+@RequestMapping("/predefinedgroupstates")
 @RequiredArgsConstructor
 public class PredefinedGroupStateController {
 
@@ -23,6 +23,12 @@ public class PredefinedGroupStateController {
     @PostMapping
     public PredefinedGroupState savePredefinedGroupState(@RequestBody PredefinedGroupStateDto predefinedGroupState) {
         return predefinedGroupStateService.saveState(predefinedGroupState);
+    }
+
+    @PostMapping("/groups/{groupId}")
+    public PredefinedGroupState savePredefinedGroupStateForUserInGroup(@PathVariable Long groupId,
+                                                                       @RequestBody PredefinedGroupStateDto predefinedGroupState) {
+        return predefinedGroupStateService.saveStateInGroup(groupId, predefinedGroupState);
     }
 
 }

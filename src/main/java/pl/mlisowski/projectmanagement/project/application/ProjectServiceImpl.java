@@ -39,6 +39,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Project> getAllProjectsInGroup(Long groupId) {
+        return projectRepository.findAllByGroupId(groupId);
+    }
+
+    @Override
     @Transactional
     public ProjectDto saveProject(ProjectCreationDto project) {
         Project projectToSave = projectCreationFactory.from(project);
@@ -53,6 +58,11 @@ public class ProjectServiceImpl implements ProjectService {
         hoursService.createHoursForOwnerId(savedProject.getId(), 0, 0);
 
         return projectFactory.to(savedProject);
+    }
+
+    @Override
+    public ProjectDto getProjectById(Long projectId) {
+        return projectFactory.to(projectRepository.getReferenceById(projectId));
     }
 
     @Override

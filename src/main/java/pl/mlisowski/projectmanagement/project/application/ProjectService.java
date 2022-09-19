@@ -12,7 +12,11 @@ public interface ProjectService {
 
     List<Project> getAll();
 
+    List<Project> getAllProjectsInGroup(Long groupId);
+
     ProjectDto saveProject(ProjectCreationDto project);
+
+    ProjectDto getProjectById(Long projectId);
 
     Project updateProject(Project project);
 

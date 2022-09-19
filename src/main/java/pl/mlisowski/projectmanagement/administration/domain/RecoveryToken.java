@@ -1,9 +1,9 @@
 package pl.mlisowski.projectmanagement.administration.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
 
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class RecoveryToken extends BaseEntity {
 
     private String token;

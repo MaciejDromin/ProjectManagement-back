@@ -9,6 +9,9 @@ public interface PredefinedGroupStateService {
 
     PredefinedGroupState saveState(PredefinedGroupStateDto predefinedGroupState);
 
+    PredefinedGroupState saveStateInGroup(Long groupId, PredefinedGroupStateDto predefinedGroupStateDto);
+    PredefinedGroupState getById(Long predefinedGroupStateId);
+
     List<PredefinedGroupState> getAll();
 
 }

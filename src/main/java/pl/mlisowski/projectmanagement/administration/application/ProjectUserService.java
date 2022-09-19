@@ -18,6 +18,8 @@ public interface ProjectUserService {
 
     ProjectUser getProjectUserByUsername(String username);
 
+    ProjectUser getProjectUserById(Long id);
+
     UserDetailsDto getUserDetails();
 
     boolean userExists(ProjectUser user);

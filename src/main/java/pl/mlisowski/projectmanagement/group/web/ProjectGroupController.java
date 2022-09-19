@@ -20,6 +20,16 @@ public class ProjectGroupController {
         return projectGroupService.getAll();
     }
 
+    @GetMapping("/users/{userId}")
+    public List<ProjectGroup> getAllGroupsPerUser(@PathVariable Long userId) {
+        return projectGroupService.getAllByProjectUserId(userId);
+    }
+
+    @PostMapping("/users/{userId}")
+    public ProjectGroup addProjectGroupForUser(@PathVariable Long userId, @RequestBody ProjectGroupDto projectGroup) {
+        return projectGroupService.saveProjectGroupForUser(userId, projectGroup);
+    }
+
     @PostMapping
     public ProjectGroup addProjectGroup(@RequestBody ProjectGroupDto projectGroup) {
         return projectGroupService.saveProjectGroup(projectGroup);

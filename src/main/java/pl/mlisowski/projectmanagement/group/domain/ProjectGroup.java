@@ -1,14 +1,14 @@
 package pl.mlisowski.projectmanagement.group.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import pl.mlisowski.projectmanagement.administration.domain.ProjectUser;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
 import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupState;
 import pl.mlisowski.projectmanagement.project.domain.Project;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -29,5 +29,10 @@ public class ProjectGroup extends BaseEntity {
     @OneToMany(mappedBy = "group")
     @JsonManagedReference
     private Set<PredefinedGroupState> predefinedGroupStates;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_user_id")
+    @JsonBackReference
+    private ProjectUser projectUser;
 
 }

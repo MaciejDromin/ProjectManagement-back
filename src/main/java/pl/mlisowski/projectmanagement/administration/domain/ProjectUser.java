@@ -1,5 +1,6 @@
 package pl.mlisowski.projectmanagement.administration.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,11 +8,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.mlisowski.projectmanagement.administration.domain.enums.Role;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
+import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
+import pl.mlisowski.projectmanagement.hours.domain.Hours;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(indexes = {
@@ -41,6 +42,17 @@ public class ProjectUser extends BaseEntity implements UserDetails {
     @Column
     @Builder.Default
     private boolean enabled = false;
+
+    @OneToOne(mappedBy = "projectUser")
+    private VerificationToken verificationtoken;
+
+    @OneToOne(mappedBy = "projectUser")
+    private RecoveryToken recoveryToken;
+
+    @OneToMany(mappedBy = "projectUser", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @Builder.Default
+    private List<ProjectGroup> userGroups = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

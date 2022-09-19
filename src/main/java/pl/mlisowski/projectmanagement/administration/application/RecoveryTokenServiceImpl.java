@@ -45,7 +45,7 @@ public class RecoveryTokenServiceImpl implements RecoveryTokenService {
 
     @Override
     public void createRecoveryToken(ProjectUser user, String token) {
-        var tk = new RecoveryToken(token, user, LocalDateTime.now().minusHours(2));
+        var tk = new RecoveryToken(token, user, LocalDateTime.now().plusHours(2));
         recoveryTokenRepository.save(tk);
     }
 

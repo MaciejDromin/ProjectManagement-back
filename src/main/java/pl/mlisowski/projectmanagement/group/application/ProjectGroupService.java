@@ -9,7 +9,11 @@ public interface ProjectGroupService {
 
     ProjectGroup saveProjectGroup(ProjectGroupDto projectGroup);
 
+    ProjectGroup saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup);
+
     List<ProjectGroup> getAll();
+
+    List<ProjectGroup> getAllByProjectUserId(Long userId);
 
     ProjectGroup getById(Long id);
 

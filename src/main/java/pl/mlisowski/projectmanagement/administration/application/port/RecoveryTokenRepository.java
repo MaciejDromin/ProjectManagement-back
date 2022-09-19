@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface RecoveryTokenRepository extends JpaRepository<RecoveryToken, Long> {
 
     Optional<RecoveryToken> findByToken(String token);
-    Optional<RecoveryToken> findByUser(ProjectUser user);
+    Optional<RecoveryToken> findByProjectUser(ProjectUser user);
 
 }

@@ -50,6 +50,12 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     }
 
     @Override
+    public ProjectUser getProjectUserById(Long id) {
+        return projectUserRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id: %s doesn't exists!".formatted(id)));
+    }
+
+    @Override
     public UserDetailsDto getUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return from(projectUserRepository.getProjectUserByUsername(authentication.getName()));
