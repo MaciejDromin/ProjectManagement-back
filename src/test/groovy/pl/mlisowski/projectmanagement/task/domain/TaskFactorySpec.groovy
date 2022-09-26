@@ -1,4 +1,4 @@
-package pl.mlisowski.projectmanagement.task
+package pl.mlisowski.projectmanagement.task.domain
 
 import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupState
 import pl.mlisowski.projectmanagement.state.domain.factory.PredefinedGroupStateFactory
@@ -28,7 +28,7 @@ class TaskFactorySpec extends Specification {
         then:
         with(task) {
             name == "test"
-            finished == false
+            !finished
         }
     }
 
@@ -43,7 +43,7 @@ class TaskFactorySpec extends Specification {
         then:
         with(taskDto) {
             name == "test"
-            finished == false
+            !finished
         }
     }
 

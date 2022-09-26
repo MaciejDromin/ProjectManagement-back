@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import javax.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
 public class CommonControllerAdvice {
@@ -14,6 +15,16 @@ public class CommonControllerAdvice {
     @ExceptionHandler({TokenExpiredException.class})
     public ResponseEntity<ErrorResponse> handleUnathorized(Exception e) {
         return error(HttpStatus.UNAUTHORIZED, e.getMessage());
+    }
+
+    @ExceptionHandler({EntityNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleNotFound(Exception e) {
+        return error(HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<ErrorResponse> handleDefault(Exception e) {
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getMessage());
     }
 
     private ResponseEntity<ErrorResponse> error(HttpStatus status, String message) {

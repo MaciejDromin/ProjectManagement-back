@@ -1,13 +1,11 @@
 package pl.mlisowski.projectmanagement.state.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
 import pl.mlisowski.projectmanagement.task.domain.Task;
 import pl.mlisowski.projectmanagement.project.domain.Project;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

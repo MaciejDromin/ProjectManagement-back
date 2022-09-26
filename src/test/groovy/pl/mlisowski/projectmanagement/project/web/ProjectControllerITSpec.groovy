@@ -8,6 +8,8 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import pl.mlisowski.projectmanagement.BaseITSpec
+import pl.mlisowski.projectmanagement.administration.application.port.ProjectUserRepository
+import pl.mlisowski.projectmanagement.administration.domain.ProjectUser
 import pl.mlisowski.projectmanagement.group.application.port.ProjectGroupRepository
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroup
 import pl.mlisowski.projectmanagement.hours.application.port.HoursRepository
@@ -26,6 +28,9 @@ class ProjectControllerITSpec extends BaseITSpec {
     ProjectGroupRepository projectGroupRepository
 
     @Autowired
+    ProjectUserRepository projectUserRepository
+
+    @Autowired
     HoursRepository hoursRepository
 
     @Autowired
@@ -36,8 +41,12 @@ class ProjectControllerITSpec extends BaseITSpec {
 
     def "Should create Project with Hours object"() {
         given:
+        def user = projectUserRepository.save(ProjectUser.builder()
+                .username("test")
+                .build())
         projectGroupRepository.save(ProjectGroup.builder()
                 .id(1)
+                .projectUser(user)
                 .build())
 
         def projectCreation = ProjectCreationDto.builder()
@@ -49,7 +58,7 @@ class ProjectControllerITSpec extends BaseITSpec {
         def response = mockMvc.perform(MockMvcRequestBuilders.post("/projects")
                 .content(objectMapper.writeValueAsString(projectCreation))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.status().is(201))
                 .andReturn()
                 .response
                 .contentAsString
