@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proman
+  labels:
+    app: proman
+spec:
+  selector:
+    matchLabels:
+      app: proman
+  template:
+    metadata:
+      labels:
+        app: proman
+    spec:
+      containers:
+        - name: proman
+          image: mlisowski/proman:local
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DB_URL
+              value: postgres-proman-service:5432
