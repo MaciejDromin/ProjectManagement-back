@@ -16,17 +16,17 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping
-    public List<Task> getAllTasks() {
+    public List<TaskDto> getAllTasks() {
         return taskService.getAll();
     }
 
     @PostMapping
-    public Task saveTask(@RequestBody TaskDto taskDto) {
+    public TaskDto saveTask(@RequestBody TaskDto taskDto) {
         return taskService.saveTask(taskDto);
     }
 
     @PostMapping("/predefinedgroupstates/{predefinedgroupstateId}")
-    public Task savePredefinedGroupStateForUserInGroup(@PathVariable Long predefinedgroupstateId,
+    public TaskDto savePredefinedGroupStateForUserInGroup(@PathVariable Long predefinedgroupstateId,
                                                           @RequestBody TaskDto task) {
         return taskService.saveTaskInPredefinedGroupState(predefinedgroupstateId, task);
     }

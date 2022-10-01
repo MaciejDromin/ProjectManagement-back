@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ProjectStateService {
 
-    ProjectState saveProjectState(ProjectStateDto projectState);
+    ProjectStateDto saveProjectState(ProjectStateDto projectState);
 
     ProjectState updateProjectState(ProjectState projectState);
 
-    List<ProjectState> getAll();
+    List<ProjectStateDto> getAll();
 
 }

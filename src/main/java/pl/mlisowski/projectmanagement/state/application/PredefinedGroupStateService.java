@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface PredefinedGroupStateService {
 
-    PredefinedGroupState saveState(PredefinedGroupStateDto predefinedGroupState);
+    PredefinedGroupStateDto saveState(PredefinedGroupStateDto predefinedGroupState);
 
-    PredefinedGroupState saveStateInGroup(Long groupId, PredefinedGroupStateDto predefinedGroupStateDto);
+    PredefinedGroupStateDto saveStateInGroup(Long groupId, PredefinedGroupStateDto predefinedGroupStateDto);
     PredefinedGroupState getById(Long predefinedGroupStateId);
 
-    List<PredefinedGroupState> getAll();
+    List<PredefinedGroupStateDto> getAll();
 
 }

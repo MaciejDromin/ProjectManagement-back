@@ -19,12 +19,12 @@ public class ProjectStateServiceImpl implements ProjectStateService {
     private final ProjectStateFactory projectStateFactory;
 
     @Override
-    public ProjectState saveProjectState(ProjectStateDto projectState) {
+    public ProjectStateDto saveProjectState(ProjectStateDto projectState) {
         ProjectState savedProjectState = projectStateRepository.save(projectStateFactory.from(projectState));
 
         hoursService.createHoursForOwnerId(savedProjectState.getId(), 0, 0);
 
-        return savedProjectState;
+        return projectStateFactory.to(savedProjectState);
     }
 
     @Override
@@ -33,7 +33,9 @@ public class ProjectStateServiceImpl implements ProjectStateService {
     }
 
     @Override
-    public List<ProjectState> getAll() {
-        return projectStateRepository.findAll();
+    public List<ProjectStateDto> getAll() {
+        return projectStateRepository.findAll().stream()
+                .map(projectStateFactory::to)
+                .toList();
     }
 }

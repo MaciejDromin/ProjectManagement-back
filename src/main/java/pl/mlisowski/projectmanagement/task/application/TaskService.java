@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface TaskService {
 
-    Task saveTask(TaskDto task);
-    Task saveTaskInPredefinedGroupState(Long predefinedGroupStateId, TaskDto taskDto);
+    TaskDto saveTask(TaskDto task);
+    TaskDto saveTaskInPredefinedGroupState(Long predefinedGroupStateId, TaskDto taskDto);
 
     Task saveTaskWithHours(TaskWithHoursDto task);
 
-    List<Task> getAll();
+    List<TaskDto> getAll();
 
 }
