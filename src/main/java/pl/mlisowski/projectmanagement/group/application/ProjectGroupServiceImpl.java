@@ -8,6 +8,8 @@ import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroupFactory;
 import pl.mlisowski.projectmanagement.group.domain.dto.ProjectGroupDto;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -25,6 +27,8 @@ public class ProjectGroupServiceImpl implements ProjectGroupService {
 
     @Override
     public ProjectGroupDto saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup) {
+        projectGroup.setProjects(new HashSet<>());
+        projectGroup.setPredefinedGroupStates(new HashSet<>());
         var group = projectGroupFactory.from(projectGroup);
         group.setProjectUser(projectUserService.getProjectUserById(userId));
         return projectGroupFactory.to(projectGroupRepository.save(group));

@@ -35,4 +35,8 @@ public class ProjectGroup extends BaseEntity {
     @JsonBackReference
     private ProjectUser projectUser;
 
+    @OneToMany(mappedBy = "sharedGroup")
+    @JsonManagedReference
+    private Set<SharedGroup> sharedGroups;
+
 }

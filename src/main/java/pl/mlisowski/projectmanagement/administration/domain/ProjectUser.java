@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.mlisowski.projectmanagement.administration.domain.enums.Role;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
+import pl.mlisowski.projectmanagement.group.domain.SharedGroup;
 import pl.mlisowski.projectmanagement.hours.domain.Hours;
 
 import javax.persistence.*;
@@ -53,6 +54,16 @@ public class ProjectUser extends BaseEntity implements UserDetails {
     @JsonManagedReference
     @Builder.Default
     private List<ProjectGroup> userGroups = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userShared")
+    @JsonManagedReference
+    @Builder.Default
+    private Set<SharedGroup> sharedGroups = new HashSet<>();
+
+    @OneToMany(mappedBy = "userSharing")
+    @JsonManagedReference
+    @Builder.Default
+    private Set<SharedGroup> groupsShared = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
