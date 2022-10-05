@@ -22,15 +22,15 @@ public class TaskServiceImpl implements TaskService {
     private final PredefinedGroupStateService predefinedGroupStateService;
 
     @Override
-    public Task saveTask(TaskDto task) {
-        return taskRepository.save(taskFactory.from(task));
+    public TaskDto saveTask(TaskDto task) {
+        return taskFactory.to(taskRepository.save(taskFactory.from(task)));
     }
 
     @Override
-    public Task saveTaskInPredefinedGroupState(Long predefinedGroupStateId, TaskDto taskDto) {
+    public TaskDto saveTaskInPredefinedGroupState(Long predefinedGroupStateId, TaskDto taskDto) {
         var task = taskFactory.from(taskDto);
         task.setPredefinedGroupState(predefinedGroupStateService.getById(predefinedGroupStateId));
-        return taskRepository.save(task);
+        return taskFactory.to(taskRepository.save(task));
     }
 
     @Override
@@ -43,7 +43,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAll() {
-        return taskRepository.findAll();
+    public List<TaskDto> getAll() {
+        return taskRepository.findAll().stream()
+                .map(taskFactory::to)
+                .toList();
     }
 }

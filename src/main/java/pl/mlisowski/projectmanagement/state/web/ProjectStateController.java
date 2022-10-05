@@ -16,12 +16,12 @@ public class ProjectStateController {
     private final ProjectStateService projectStateService;
 
     @GetMapping
-    public List<ProjectState> getAllProjectStates() {
+    public List<ProjectStateDto> getAllProjectStates() {
         return projectStateService.getAll();
     }
 
     @PostMapping
-    public ProjectState saveProjectState(@RequestBody ProjectStateDto projectState) {
+    public ProjectStateDto saveProjectState(@RequestBody ProjectStateDto projectState) {
         return projectStateService.saveProjectState(projectState);
     }
 

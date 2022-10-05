@@ -32,15 +32,19 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public List<Project> getAll() {
+    public List<ProjectDto> getAll() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var user = projectUserService.getProjectUserByUsername(authentication.getName());
-        return projectRepository.findAll();
+        return projectRepository.findAll().stream()
+                .map(projectFactory::to)
+                .toList();
     }
 
     @Override
-    public List<Project> getAllProjectsInGroup(Long groupId) {
-        return projectRepository.findAllByGroupId(groupId);
+    public List<ProjectDto> getAllProjectsInGroup(Long groupId) {
+        return projectRepository.findAllByGroupId(groupId).stream()
+                .map(projectFactory::to)
+                .toList();
     }
 
     @Override
@@ -71,14 +75,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project nestProject(NestProject nestProject) {
+    public ProjectDto nestProject(NestProject nestProject) {
         Project nestTo = nestProject.getNestTo();
         Project nested = nestProject.getNested();
 
         nested.setParentProject(nestTo);
         nestTo.getChildProjects().add(nested);
 
-        return projectRepository.save(nestTo);
+        return projectFactory.to(projectRepository.save(nestTo));
     }
 
     @Override

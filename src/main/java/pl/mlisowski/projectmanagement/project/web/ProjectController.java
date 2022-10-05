@@ -21,12 +21,12 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping
-    public List<Project> getAllProjects() {
+    public List<ProjectDto> getAllProjects() {
         return projectService.getAll();
     }
 
     @GetMapping("/groups/{groupId}")
-    public List<Project> getAllProjectsInGroup(@PathVariable Long groupId) {
+    public List<ProjectDto> getAllProjectsInGroup(@PathVariable Long groupId) {
         return projectService.getAllProjectsInGroup(groupId);
     }
 
@@ -42,7 +42,7 @@ public class ProjectController {
     }
 
     @PostMapping("/nestProject")
-    public Project nestProject(@RequestBody NestProject nestProject) {
+    public ProjectDto nestProject(@RequestBody NestProject nestProject) {
         return projectService.nestProject(nestProject);
     }
 

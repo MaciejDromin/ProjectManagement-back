@@ -80,7 +80,7 @@ class ProjectUserControllerITSpec extends BaseITSpec {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(email)))
                 .andExpect(MockMvcResultMatchers.status().is(202))
-        user = projectUserRepository.findProjectUserByUsername("Username").get()
+        var user = projectUserRepository.findProjectUserByUsername("Username").get()
         user.getPassword() == "password"
         def token = recoveryTokenRepository.findByProjectUser(user).get()
         def recoveryCredentials = RecoveryCredentialsDto.builder()

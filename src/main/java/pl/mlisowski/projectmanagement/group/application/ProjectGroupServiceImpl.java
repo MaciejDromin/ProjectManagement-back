@@ -19,25 +19,29 @@ public class ProjectGroupServiceImpl implements ProjectGroupService {
     private final ProjectUserService projectUserService;
 
     @Override
-    public ProjectGroup saveProjectGroup(ProjectGroupDto projectGroup) {
-        return projectGroupRepository.save(projectGroupFactory.from(projectGroup));
+    public ProjectGroupDto saveProjectGroup(ProjectGroupDto projectGroup) {
+        return projectGroupFactory.to(projectGroupRepository.save(projectGroupFactory.from(projectGroup)));
     }
 
     @Override
-    public ProjectGroup saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup) {
+    public ProjectGroupDto saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup) {
         var group = projectGroupFactory.from(projectGroup);
         group.setProjectUser(projectUserService.getProjectUserById(userId));
-        return projectGroupRepository.save(group);
+        return projectGroupFactory.to(projectGroupRepository.save(group));
     }
 
     @Override
-    public List<ProjectGroup> getAll() {
-        return projectGroupRepository.findAll();
+    public List<ProjectGroupDto> getAll() {
+        return projectGroupRepository.findAll().stream()
+                .map(projectGroupFactory::to)
+                .toList();
     }
 
     @Override
-    public List<ProjectGroup> getAllByProjectUserId(Long userId) {
-        return projectGroupRepository.findAllByProjectUserId(userId);
+    public List<ProjectGroupDto> getAllByProjectUserId(Long userId) {
+        return projectGroupRepository.findAllByProjectUserId(userId).stream()
+                .map(projectGroupFactory::to)
+                .toList();
     }
 
     @Override
