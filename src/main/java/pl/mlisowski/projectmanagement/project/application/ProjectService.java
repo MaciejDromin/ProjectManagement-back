@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface ProjectService {
 
-    List<Project> getAll();
+    List<ProjectDto> getAll();
 
-    List<Project> getAllProjectsInGroup(Long groupId);
+    List<ProjectDto> getAllProjectsInGroup(Long groupId);
 
     ProjectDto saveProject(ProjectCreationDto project);
 
@@ -20,7 +20,7 @@ public interface ProjectService {
 
     Project updateProject(Project project);
 
-    Project nestProject(NestProject nestProject);
+    ProjectDto nestProject(NestProject nestProject);
 
     void deleteProject(Long id);
 

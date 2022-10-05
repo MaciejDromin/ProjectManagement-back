@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ProjectGroupService {
 
-    ProjectGroup saveProjectGroup(ProjectGroupDto projectGroup);
+    ProjectGroupDto saveProjectGroup(ProjectGroupDto projectGroup);
 
-    ProjectGroup saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup);
+    ProjectGroupDto saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup);
 
-    List<ProjectGroup> getAll();
+    List<ProjectGroupDto> getAll();
 
-    List<ProjectGroup> getAllByProjectUserId(Long userId);
+    List<ProjectGroupDto> getAllByProjectUserId(Long userId);
 
     ProjectGroup getById(Long id);
 

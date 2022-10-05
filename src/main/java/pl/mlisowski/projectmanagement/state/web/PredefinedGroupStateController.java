@@ -16,17 +16,17 @@ public class PredefinedGroupStateController {
     private final PredefinedGroupStateService predefinedGroupStateService;
 
     @GetMapping
-    public List<PredefinedGroupState> getAllPredefinedGroupStates() {
+    public List<PredefinedGroupStateDto> getAllPredefinedGroupStates() {
         return predefinedGroupStateService.getAll();
     }
 
     @PostMapping
-    public PredefinedGroupState savePredefinedGroupState(@RequestBody PredefinedGroupStateDto predefinedGroupState) {
+    public PredefinedGroupStateDto savePredefinedGroupState(@RequestBody PredefinedGroupStateDto predefinedGroupState) {
         return predefinedGroupStateService.saveState(predefinedGroupState);
     }
 
     @PostMapping("/groups/{groupId}")
-    public PredefinedGroupState savePredefinedGroupStateForUserInGroup(@PathVariable Long groupId,
+    public PredefinedGroupStateDto savePredefinedGroupStateForUserInGroup(@PathVariable Long groupId,
                                                                        @RequestBody PredefinedGroupStateDto predefinedGroupState) {
         return predefinedGroupStateService.saveStateInGroup(groupId, predefinedGroupState);
     }
