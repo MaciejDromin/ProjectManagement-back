@@ -9,6 +9,7 @@ import pl.mlisowski.projectmanagement.common.BaseEntity;
 import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupState;
 import pl.mlisowski.projectmanagement.project.domain.Project;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,19 +25,22 @@ public class ProjectGroup extends BaseEntity {
 
     @OneToMany(mappedBy = "group")
     @JsonManagedReference
-    private Set<Project> projects;
+    @Builder.Default
+    private Set<Project> projects = new HashSet<>();
 
     @OneToMany(mappedBy = "group")
     @JsonManagedReference
-    private Set<PredefinedGroupState> predefinedGroupStates;
+    @Builder.Default
+    private Set<PredefinedGroupState> predefinedGroupStates = new HashSet<>();
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "project_user_id")
     @JsonBackReference
     private ProjectUser projectUser;
 
-    @OneToMany(mappedBy = "sharedGroup")
+    @OneToMany(mappedBy = "groupShared")
     @JsonManagedReference
-    private Set<SharedGroup> sharedGroups;
+    @Builder.Default
+    private Set<SharedGroup> sharedGroups = new HashSet<>();
 
 }

@@ -33,7 +33,7 @@ public class SharedGroupServiceImpl implements SharedGroupService {
                 .map(group -> groupsFactory.to(group, true))
                 .toList());
         ret.addAll(findAllByUserId(userId).stream()
-                .map(sharedGroup -> groupsFactory.to(sharedGroup.getSharedGroup(), false))
+                .map(sharedGroup -> groupsFactory.to(sharedGroup.getGroupShared(), false))
                 .toList());
         return ret;
     }
@@ -44,7 +44,7 @@ public class SharedGroupServiceImpl implements SharedGroupService {
         var groupShared = projectGroupService.getById(shareGroupDto.getGroupId());
         var userSharedTo = projectUserService.getProjectUserByEmail(shareGroupDto.getUserSharedToEmail());
         sharedGroupRepository.save(SharedGroup.builder()
-                .sharedGroup(groupShared)
+                .groupShared(groupShared)
                 .userShared(userSharedTo)
                 .userSharing(userSharing)
                 .build());

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_URL}/projectmngr?useUnicode=yes&characterEncoding=UTF-8
+    url: jdbc:postgresql://127.0.0.1:5432/projectmngr?useUnicode=yes&characterEncoding=UTF-8
     username: projectuser
     password: password
   jpa:

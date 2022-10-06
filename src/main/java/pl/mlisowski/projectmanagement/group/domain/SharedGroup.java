@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import pl.mlisowski.projectmanagement.administration.domain.ProjectUser;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
-
 import javax.persistence.*;
 
 @Entity
@@ -22,7 +21,7 @@ public class SharedGroup extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "shared_group_id")
     @JsonBackReference
-    private ProjectGroup sharedGroup;
+    private ProjectGroup groupShared;
 
     @ManyToOne
     @JoinColumn(name = "user_shared_id")

@@ -38,7 +38,7 @@ public class ProjectManagementSecurity {
                 .and()
                 .csrf()
                 .disable()
-                .authorizeHttpRequests((auth) -> {
+                .authorizeHttpRequests(auth -> {
                             try {
                                 auth
                                         .antMatchers("/").permitAll()
@@ -62,7 +62,7 @@ public class ProjectManagementSecurity {
     }
 
     @Bean
-    public JsonObjectAuthenticationFilter authenticationFilter() throws Exception {
+    public JsonObjectAuthenticationFilter authenticationFilter() {
         JsonObjectAuthenticationFilter filter = new JsonObjectAuthenticationFilter();
         filter.setAuthenticationSuccessHandler(authSuccessHandler);
         filter.setAuthenticationManager(authenticationManager);

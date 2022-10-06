@@ -10,7 +10,6 @@ import pl.mlisowski.projectmanagement.administration.domain.enums.Role;
 import pl.mlisowski.projectmanagement.common.BaseEntity;
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
 import pl.mlisowski.projectmanagement.group.domain.SharedGroup;
-import pl.mlisowski.projectmanagement.hours.domain.Hours;
 
 import javax.persistence.*;
 import java.util.*;

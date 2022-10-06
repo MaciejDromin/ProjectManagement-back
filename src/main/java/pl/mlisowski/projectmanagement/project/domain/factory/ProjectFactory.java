@@ -45,7 +45,6 @@ public class ProjectFactory implements AbstractFactory<ProjectDto, Project> {
                 .name(toConvert.getName())
                 .description(toConvert.getDescription())
                 .status(toConvert.getStatus())
-                .parentProject(to(toConvert.getParentProject()))
                 .childProjects(toConvert.getChildProjects().stream()
                         .map(this::to)
                         .collect(Collectors.toSet())

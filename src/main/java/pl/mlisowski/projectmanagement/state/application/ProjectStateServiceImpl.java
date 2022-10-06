@@ -22,7 +22,7 @@ public class ProjectStateServiceImpl implements ProjectStateService {
     public ProjectStateDto saveProjectState(ProjectStateDto projectState) {
         ProjectState savedProjectState = projectStateRepository.save(projectStateFactory.from(projectState));
 
-        hoursService.createHoursForOwnerId(savedProjectState.getId(), 0, 0);
+        hoursService.createHoursForOwnerId(savedProjectState.getUuid(), 0, 0);
 
         return projectStateFactory.to(savedProjectState);
     }
