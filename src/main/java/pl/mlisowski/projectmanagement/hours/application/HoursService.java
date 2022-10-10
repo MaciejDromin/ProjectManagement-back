@@ -6,10 +6,10 @@ public interface HoursService {
 
     Hours saveHours(Hours hours);
 
-    Hours getByOwnerId(Long ownerId);
+    Hours getByOwnerId(String ownerId);
 
-    Hours createHoursForOwnerId(Long ownerId, int realHours, int estimatedHours);
+    Hours createHoursForOwnerId(String ownerId, int realHours, int estimatedHours);
 
-    void deleteHoursByOwnerId(Long ownerId);
+    void deleteHoursByOwnerId(String ownerId);
 
 }

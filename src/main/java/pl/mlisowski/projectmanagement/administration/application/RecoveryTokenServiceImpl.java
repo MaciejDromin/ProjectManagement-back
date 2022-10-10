@@ -1,7 +1,6 @@
 package pl.mlisowski.projectmanagement.administration.application;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.mlisowski.projectmanagement.administration.application.port.RecoveryTokenRepository;
@@ -9,7 +8,6 @@ import pl.mlisowski.projectmanagement.administration.domain.ProjectUser;
 import pl.mlisowski.projectmanagement.administration.domain.RecoveryToken;
 import pl.mlisowski.projectmanagement.administration.domain.dto.RecoveryCredentialsDto;
 import pl.mlisowski.projectmanagement.administration.domain.mail.MailSender;
-
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.UUID;

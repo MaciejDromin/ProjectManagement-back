@@ -8,6 +8,8 @@ import pl.mlisowski.projectmanagement.group.domain.ProjectGroup;
 import pl.mlisowski.projectmanagement.group.domain.ProjectGroupFactory;
 import pl.mlisowski.projectmanagement.group.domain.dto.ProjectGroupDto;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -19,12 +21,9 @@ public class ProjectGroupServiceImpl implements ProjectGroupService {
     private final ProjectUserService projectUserService;
 
     @Override
-    public ProjectGroupDto saveProjectGroup(ProjectGroupDto projectGroup) {
-        return projectGroupFactory.to(projectGroupRepository.save(projectGroupFactory.from(projectGroup)));
-    }
-
-    @Override
     public ProjectGroupDto saveProjectGroupForUser(Long userId, ProjectGroupDto projectGroup) {
+        projectGroup.setProjects(new HashSet<>());
+        projectGroup.setPredefinedGroupStates(new HashSet<>());
         var group = projectGroupFactory.from(projectGroup);
         group.setProjectUser(projectUserService.getProjectUserById(userId));
         return projectGroupFactory.to(projectGroupRepository.save(group));
@@ -46,6 +45,7 @@ public class ProjectGroupServiceImpl implements ProjectGroupService {
 
     @Override
     public ProjectGroup getById(Long id) {
-        return projectGroupRepository.findById(id).orElseGet(null);
+        return projectGroupRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Group with %d id doesn't exists".formatted(id)));
     }
 }

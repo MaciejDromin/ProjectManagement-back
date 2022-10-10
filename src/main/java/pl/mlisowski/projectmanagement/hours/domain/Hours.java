@@ -19,7 +19,7 @@ import java.util.List;
 public class Hours extends BaseEntity {
 
     @Column
-    private Long ownerId;
+    private String ownerId;
 
     @Column
     @Builder.Default

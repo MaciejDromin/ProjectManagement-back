@@ -33,12 +33,28 @@ class StateCalculatorServiceSpec extends Specification {
                                                 .build()
                                 ]).build()
                 ] as Set)
+                .childProjects([
+                        Project.builder()
+                                .status(ProjectStatus.IN_PROGRESS)
+                                .states([
+                                        ProjectState.builder()
+                                                .tasks([
+                                                        Task.builder()
+                                                                .finished(true)
+                                                                .build(),
+                                                        Task.builder()
+                                                                .finished(true)
+                                                                .build()
+                                                ]).build()
+                                ] as Set)
+                                .build()
+                ] as Set)
                 .build()
         when:
         stateCalculatorService.calculateCurrentStates(project)
         then:
-        1 * projectStateService.updateProjectState(_)
-        1 * projectService.updateProject(_)
+        2 * projectStateService.updateProjectState(_)
+        2 * projectService.updateProject(_)
         ProjectStatus.FINISHED == project.getStatus()
     }
 

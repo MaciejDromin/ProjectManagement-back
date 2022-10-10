@@ -3,10 +3,8 @@ package pl.mlisowski.projectmanagement.state.domain.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
 import pl.mlisowski.projectmanagement.task.domain.dto.TaskDto;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

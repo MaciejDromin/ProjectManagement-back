@@ -27,6 +27,7 @@ public class ProjectState extends BaseEntity {
 
     @OneToMany(mappedBy = "projectState", cascade = CascadeType.ALL)
     @JsonIgnore
+    @Builder.Default
     private List<Task> tasks = new ArrayList<>();
 
     @ManyToOne

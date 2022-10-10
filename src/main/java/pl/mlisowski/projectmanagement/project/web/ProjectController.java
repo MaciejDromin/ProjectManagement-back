@@ -5,8 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.mlisowski.projectmanagement.project.application.ProjectService;
-import pl.mlisowski.projectmanagement.project.domain.NestProject;
-import pl.mlisowski.projectmanagement.project.domain.Project;
+import pl.mlisowski.projectmanagement.project.domain.NestProjectDto;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectCreationDto;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
 
@@ -41,9 +40,9 @@ public class ProjectController {
         return projectService.saveProject(project);
     }
 
-    @PostMapping("/nestProject")
-    public ProjectDto nestProject(@RequestBody NestProject nestProject) {
-        return projectService.nestProject(nestProject);
+    @PostMapping("/nestproject")
+    public ProjectDto nestProject(@RequestBody NestProjectDto nestProjectDto) {
+        return projectService.nestProject(nestProjectDto);
     }
 
     @DeleteMapping("/{id}")

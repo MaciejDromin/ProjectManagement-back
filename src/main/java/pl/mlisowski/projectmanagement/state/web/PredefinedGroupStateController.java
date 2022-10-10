@@ -3,9 +3,7 @@ package pl.mlisowski.projectmanagement.state.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.mlisowski.projectmanagement.state.application.PredefinedGroupStateService;
-import pl.mlisowski.projectmanagement.state.domain.PredefinedGroupState;
 import pl.mlisowski.projectmanagement.state.domain.dto.PredefinedGroupStateDto;
-
 import java.util.List;
 
 @RestController

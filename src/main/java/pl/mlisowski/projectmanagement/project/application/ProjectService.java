@@ -1,7 +1,7 @@
 package pl.mlisowski.projectmanagement.project.application;
 
 
-import pl.mlisowski.projectmanagement.project.domain.NestProject;
+import pl.mlisowski.projectmanagement.project.domain.NestProjectDto;
 import pl.mlisowski.projectmanagement.project.domain.Project;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectCreationDto;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
@@ -20,7 +20,7 @@ public interface ProjectService {
 
     Project updateProject(Project project);
 
-    ProjectDto nestProject(NestProject nestProject);
+    ProjectDto nestProject(NestProjectDto nestProjectDto);
 
     void deleteProject(Long id);
 

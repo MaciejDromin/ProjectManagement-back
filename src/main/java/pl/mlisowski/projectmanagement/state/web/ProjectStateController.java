@@ -3,13 +3,11 @@ package pl.mlisowski.projectmanagement.state.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.mlisowski.projectmanagement.state.application.ProjectStateService;
-import pl.mlisowski.projectmanagement.state.domain.ProjectState;
 import pl.mlisowski.projectmanagement.state.domain.dto.ProjectStateDto;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/projectState")
+@RequestMapping("/projectstates")
 @RequiredArgsConstructor
 public class ProjectStateController {
 

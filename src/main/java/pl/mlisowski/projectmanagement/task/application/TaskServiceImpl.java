@@ -34,12 +34,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task saveTaskWithHours(TaskWithHoursDto task) {
+    public TaskDto saveTaskWithHours(TaskWithHoursDto task) {
         Task savedTask = taskRepository.save(taskFactory.from(task.getTaskDto()));
 
-        hoursService.createHoursForOwnerId(savedTask.getId(), task.getRealHours(), task.getEstimatedHours());
+        hoursService.createHoursForOwnerId(savedTask.getUuid(), task.getRealHours(), task.getEstimatedHours());
 
-        return savedTask;
+        return taskFactory.to(savedTask);
     }
 
     @Override
