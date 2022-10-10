@@ -42,7 +42,7 @@ class CommonControllerAdviceITSpec extends BaseITSpec {
         thrownException                                                                           | expectedStatus   | expectedMessage
         new TokenExpiredException(ERROR_MESSAGE, LocalDateTime.now().toInstant(ZoneOffset.UTC))   | 401              | ERROR_MESSAGE
         new EntityNotFoundException(ERROR_MESSAGE)                                                | 404              | ERROR_MESSAGE
-        new Exception(ERROR_MESSAGE)                                                              | 500              | ERROR_MESSAGE
+        new Exception(ERROR_MESSAGE)                                                              | 500              | "500"
     }
 
 }

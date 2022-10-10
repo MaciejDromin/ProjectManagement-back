@@ -24,7 +24,7 @@ public class CommonControllerAdvice {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<ErrorResponse> handleDefault(Exception e) {
-        return error(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getMessage());
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
 
     private ResponseEntity<ErrorResponse> error(HttpStatus status, String message) {

@@ -6,6 +6,8 @@ import pl.mlisowski.projectmanagement.common.AbstractFactory;
 import pl.mlisowski.projectmanagement.state.domain.ProjectState;
 import pl.mlisowski.projectmanagement.state.domain.dto.ProjectStateDto;
 import pl.mlisowski.projectmanagement.task.domain.TaskFactory;
+
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,7 +24,7 @@ public class ProjectStateFactory implements AbstractFactory<ProjectStateDto, Pro
                 .completed(toConvert.isCompleted())
                 .tasks(toConvert.getTasks().stream()
                         .map(taskFactory::from)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toCollection(ArrayList::new))
                 )
                 .build();
     }
@@ -37,7 +39,7 @@ public class ProjectStateFactory implements AbstractFactory<ProjectStateDto, Pro
                 .completed(toConvert.isCompleted())
                 .tasks(toConvert.getTasks().stream()
                         .map(taskFactory::to)
-                        .collect(Collectors.toList())
+                        .toList()
                 )
                 .build();
     }

@@ -3,7 +3,6 @@ package pl.mlisowski.projectmanagement.task.domain.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 import pl.mlisowski.projectmanagement.state.domain.dto.PredefinedGroupStateDto;
 import pl.mlisowski.projectmanagement.state.domain.dto.ProjectStateDto;
 

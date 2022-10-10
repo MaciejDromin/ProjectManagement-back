@@ -7,8 +7,8 @@ import pl.mlisowski.projectmanagement.hours.domain.Hours;
 @Repository
 public interface HoursRepository extends JpaRepository<Hours, Long> {
 
-    Hours findHoursByOwnerId(Long ownerId);
+    Hours findHoursByOwnerId(String ownerId);
 
-    void deleteHoursByOwnerId(Long ownerId);
+    void deleteHoursByOwnerId(String ownerId);
 
 }

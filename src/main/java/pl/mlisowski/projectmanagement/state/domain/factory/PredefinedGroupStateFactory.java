@@ -37,7 +37,7 @@ public class PredefinedGroupStateFactory implements AbstractFactory<PredefinedGr
                 .name(toConvert.getName())
                 .tasks(toConvert.getTasks().stream()
                         .map(taskFactory::to)
-                        .collect(Collectors.toList())
+                        .toList()
                 )
                 .build();
     }

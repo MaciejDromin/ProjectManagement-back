@@ -24,7 +24,6 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final int expTime;
     private final String secret;
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final ProjectUserService projectUserService;
 
     public AuthSuccessHandler(@Value("${jwt.expiration}") int expTime,

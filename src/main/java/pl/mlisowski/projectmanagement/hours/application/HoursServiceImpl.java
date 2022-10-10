@@ -17,12 +17,12 @@ public class HoursServiceImpl implements HoursService {
     }
 
     @Override
-    public Hours getByOwnerId(Long ownerId) {
+    public Hours getByOwnerId(String ownerId) {
         return hoursRepository.findHoursByOwnerId(ownerId);
     }
 
     @Override
-    public Hours createHoursForOwnerId(Long ownerId, int realHours, int estimatedHours) {
+    public Hours createHoursForOwnerId(String ownerId, int realHours, int estimatedHours) {
         return hoursRepository.save(Hours.builder()
                 .ownerId(ownerId)
                 .realHours(realHours)
@@ -31,7 +31,7 @@ public class HoursServiceImpl implements HoursService {
     }
 
     @Override
-    public void deleteHoursByOwnerId(Long ownerId) {
+    public void deleteHoursByOwnerId(String ownerId) {
         hoursRepository.deleteHoursByOwnerId(ownerId);
     }
 

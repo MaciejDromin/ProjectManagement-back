@@ -1,13 +1,10 @@
 package pl.mlisowski.projectmanagement.project.application;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.mlisowski.projectmanagement.administration.application.ProjectUserService;
 import pl.mlisowski.projectmanagement.hours.application.HoursService;
 import pl.mlisowski.projectmanagement.project.application.port.ProjectRepository;
-import pl.mlisowski.projectmanagement.project.domain.NestProject;
+import pl.mlisowski.projectmanagement.project.domain.NestProjectDto;
 import pl.mlisowski.projectmanagement.project.domain.Project;
 import pl.mlisowski.projectmanagement.project.domain.dto.ProjectDto;
 import pl.mlisowski.projectmanagement.project.domain.factory.ProjectCreationFactory;
@@ -17,7 +14,6 @@ import pl.mlisowski.projectmanagement.state.domain.factory.PredefinedGroupStateT
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,13 +24,10 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectFactory projectFactory;
     private final ProjectCreationFactory projectCreationFactory;
     private final PredefinedGroupStateToProjectStateFactory predefinedGroupStateToProjectStateFactory;
-    private final ProjectUserService projectUserService;
 
 
     @Override
     public List<ProjectDto> getAll() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = projectUserService.getProjectUserByUsername(authentication.getName());
         return projectRepository.findAll().stream()
                 .map(projectFactory::to)
                 .toList();
@@ -59,7 +52,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project savedProject = projectRepository.save(projectToSave);
 
-        hoursService.createHoursForOwnerId(savedProject.getId(), 0, 0);
+        hoursService.createHoursForOwnerId(savedProject.getUuid(), 0, 0);
 
         return projectFactory.to(savedProject);
     }
@@ -75,9 +68,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDto nestProject(NestProject nestProject) {
-        Project nestTo = nestProject.getNestTo();
-        Project nested = nestProject.getNested();
+    public ProjectDto nestProject(NestProjectDto nestProjectDto) {
+        Project nestTo = projectFactory.from(nestProjectDto.getNestTo());
+        Project nested = projectFactory.from(nestProjectDto.getNested());
 
         nested.setParentProject(nestTo);
         nestTo.getChildProjects().add(nested);
@@ -88,8 +81,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     public void deleteProject(Long id) {
-        hoursService.deleteHoursByOwnerId(id);
-        projectRepository.delete(projectRepository.getReferenceById(id));
+        var project = projectRepository.getReferenceById(id);
+        hoursService.deleteHoursByOwnerId(project.getUuid());
+        projectRepository.delete(project);
     }
 
 }

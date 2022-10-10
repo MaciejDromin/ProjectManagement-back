@@ -3,9 +3,8 @@ package pl.mlisowski.projectmanagement.task.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.mlisowski.projectmanagement.task.application.TaskService;
-import pl.mlisowski.projectmanagement.task.domain.Task;
 import pl.mlisowski.projectmanagement.task.domain.dto.TaskDto;
-
+import pl.mlisowski.projectmanagement.task.domain.dto.TaskWithHoursDto;
 import java.util.List;
 
 @RestController
@@ -29,6 +28,11 @@ public class TaskController {
     public TaskDto savePredefinedGroupStateForUserInGroup(@PathVariable Long predefinedgroupstateId,
                                                           @RequestBody TaskDto task) {
         return taskService.saveTaskInPredefinedGroupState(predefinedgroupstateId, task);
+    }
+
+    @PostMapping("/savewithhours")
+    public TaskDto saveTaskWithHours(@RequestBody TaskWithHoursDto taskWithHoursDto) {
+        return taskService.saveTaskWithHours(taskWithHoursDto);
     }
 
 }
